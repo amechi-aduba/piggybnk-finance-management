@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(rgba(26, 3, 199, 0.56), rgba(49, 30, 195, 0.56));
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.navbar {
+    background-color: rgba(173, 173, 173, 0.56);
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.custom-container {
+    width: 100%;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background-color: #343a40; /* Dark background color */
+    color: #ffffff; /* Text color */
+    margin-bottom: 5rem;
+}
+
+.text-center {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width:70%;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated {
+    animation: fadeIn 1.5s ease-in-out;
+}
