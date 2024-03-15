@@ -1,20 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
-# Create your views here:
+class FinanceManagementView(TemplateView):
+    template_name = 'finance_management.html'
+
 def home(request):
-    return render(request, 'pages/finance_management.html', {})
+    return render(request, 'finance_management.html', {})
 
+@login_required
 def finances(request):
-    return render(request, 'pages/finances.html', {})
+    return render(request, 'finances.html', {})
 
-def finance_management(request):
-    return render(request, 'pages/finance_management.html', {})
-
+@login_required
 def planner(request):
-    return render(request, 'pages/planner.html', {})
+    return render(request, 'planner.html', {})
 
+@login_required
 def assistant(request):
-    return render(request, 'pages/assistant.html', {})
+    return render(request, 'assistant.html', {})
 
 def about(request):
-    return render(request,'pages/about.html', {})
+    return render(request, 'about.html', {})
+
+def login_page(request):
+    return render(request, 'login.html', {})
+
+def registration(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration.html', {'form': form})
