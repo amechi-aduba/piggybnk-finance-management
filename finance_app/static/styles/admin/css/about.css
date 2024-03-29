@@ -7,37 +7,52 @@
 .header {
     min-height: 100vh;
     width: 100%;
-    background: linear-gradient(rgba(26, 3, 199, 0.56), rgba(49, 30, 195, 0.56));
+    background: #343a40;
     background-position: center;
     background-size: cover;
     position: relative;
 }
 
 .navbar {
-    background-color: rgba(173, 173, 173, 0.56);
+    background-color: rgba(95, 81, 81, 0.56);
     padding: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
 }
+.piggy-svg {
+    width: 65px;
+    height: auto;
+}
+
+.piggybnk {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
 
 .custom-container {
     width: 100%;
     padding-top: 5rem;
     padding-bottom: 5rem;
-    background-color: #343a40; /* Dark background color */
-    color: #ffffff; /* Text color */
+    background-color: #343a40; 
+    color: #ffffff;
     margin-bottom: 5rem;
 }
 
-.text-center {
-    position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width:70%;
+.container-xxl h1 {
+    margin-bottom: 45px;
+    margin-top: 20px;  /* Adjust the value as needed */
+}
+
+#info-text-1 {
+    color: rgb(255,255,255);
+}
+#info-text-2 {
+    color: rgb(255,255,255);
 }
 
 @keyframes fadeIn {

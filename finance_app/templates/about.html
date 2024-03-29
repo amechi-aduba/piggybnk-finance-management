@@ -12,7 +12,7 @@
 
     <!-- Font Awesome CSS -->
     <!-- Add the link to Font Awesome CSS here -->
-
+    <script src="https://kit.fontawesome.com/4fd6497ea7.js" crossorigin="anonymous"></script>
     <!-- Your custom styles -->
     <link rel="stylesheet" href="{% static 'styles/admin/css/about.css' %}">
 </head>
@@ -20,13 +20,23 @@
 <!-- Your HTML body content goes here -->
 <body>
     <section class="header">
-        <!--Navbar-->
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light">
+            <!-- Logo -->
+            <div class="row align-items-center">
+                <img src="{% static 'images/piggy-bank-solid.svg' %}" alt="Logo" class="piggy-svg">
+                <div class="col piggybnk">
+                    <a class="navbar-brand" href="#">PIGGYBNK</a>
+                </div>
+            </div>
+
+            <!-- Navbar Toggler Button -->
             <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!--Links-->
+
+            <!-- Navbar Links -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
                 <div class="nav-links">
                     <ul class="navbar-nav">
@@ -37,28 +47,32 @@
                         <li class="nav-item"><a href="{% url 'about' %}" class="nav-link active">About Us</a></li>
                     </ul>
                 </div>
-            </div>
+            </div>            
         </nav>
         <div class="container-xxl py-5 bg dark hero-header mb-5 mid-text-container">
             <div class="Row align-items-center text-center">
                 <h1 class="display-3 text-white animated fadeIn">About Us</h1>
-                <p> Amechi Aduba and Isaac Tomeho are undergraduate students from Clark University who have a firsthand
-                    understanding of the daily struggles of college students overspending on things 
+                <p id="info-text-1"> Amechi Aduba and Isaac Tomeho are undergraduate students from Clark University who have a firsthand
+                    understanding of the daily struggles of college students overspending on things.
+                </p>
+                <h1 class="display-3 text-white animated fadeIn">The Stats</h1>
+                <p id="info-text-2"> Grand Canyon University has estimated that historically a college student's budget can be affected by items other than food, housing and transportation. On average, students can expect to spend about $158.98 on clothing and accessories per year, and about $164.38 on furnishings. Electronics are a more significant expense, at an average of $306.41 per year. 
                 </p>
             </div>
         </div>    
     </section>
 
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
-<!-- Optional JavaScript -->
-<!-- jQuery, Popper.js, Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
 </html>

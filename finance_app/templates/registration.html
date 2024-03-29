@@ -15,17 +15,25 @@
         <form method="post">
             {% csrf_token %}
             <div class="input-box">
+                {{ form.username.label_tag }}
                 {{ form.username }}
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                {{ form.password1 }}
+                {{ form.password.label_tag }}
+                {{ form.password }}
                 <i class='bx bxs-key'></i>
             </div>
             <div class="input-box">
-                {{ form.password2 }}
+                {{ form.confirm_password.label_tag }}
+                {{ form.confirm_password }}
                 <i class='bx bxs-key'></i>
             </div>
+            {% if form.errors %}
+                <div class="error">
+                    {{ form.errors }}
+                </div>
+            {% endif %}
             <button type="submit" class="btn">Register</button>
             <div class="login-link">
                 <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>

@@ -1,6 +1,6 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,25 +10,73 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- Font Awesome CSS -->
-    <!-- Add the link to Font Awesome CSS here -->
-
     <!-- Your custom styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static "styles/admin/css/finances.css" %}">
 </head>
 
 <!-- Your HTML body content goes here -->
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+        <a class="navbar-brand" href="#">PIGGYBNK</a>
+        <ul class="nav-links">
+            <li><a href="{% url 'finance_management' %}">Home</a></li>
+            <li><a href="{% url 'finances' %}" class="active">Finances</a></li>
+            <li><a href="{% url 'planner' %}">Planner</a></li>
+            <li><a href="{% url 'assistant' %}">Assistant</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+        </ul>
+        </div>
+    </nav>
+    <h1 class='title-text'>Your Finances</h1>
 
+    <!-- Input Form -->
+    <div class="container">
+        <form id="transaction-form" class ="transaction-form">
+            <div class="left">
+                <!-- Transaction Input Form -->
+                <input type="text" id="transaction-name" placeholder="Enter transaction name">
+                <input type="number" id="transaction-amount" placeholder="Enter transaction amount">
+            </div>
+            <div class="right">
+                <!-- Reimbursement Input Form -->
+                <input type="text" id="payment-name" placeholder="Enter the name of whoever paid you">
+                <input type="number" id="reimbursement-amount" placeholder="Enter reimbursement amount">
+            </div>
+            <button class="button" type="submit">Submit Payments</button> <!-- Submit button outside the forms -->
+        </form>
+        <div class="chart-container">
+            <!-- Pie Chart Container -->
+            <canvas id="pie-chart"></canvas>
+        </div>
+        </div>
+        <table id="transaction-table" class="table hidden">
+            <h1 class ='your-piggybnk hidden'> Your Piggybnk </h1>
+            <thead>
+                <tr>
+                    <th class='subtitles'>Transaction Name</th>
+                    <th class='subtitles'>Transaction Amount</th>
+                    <th class='subtitles'>Reimbursement Name</th>
+                    <th class='subtitles'>Reimbursement Amount</th>
+                </tr>
+            </thead>
+            <tbody class='finance-vals'>
+                <!-- Table rows for transactions and reimbursements will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery, Popper.js, Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<script src="{% static "styles/admin/js/finances.js" %}"></script>
+</body>
 </html>

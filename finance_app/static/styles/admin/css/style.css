@@ -7,14 +7,14 @@
 .header {
     min-height: 100vh;
     width: 100%;
-    background: linear-gradient(rgba(26, 3, 199, 0.56), rgba(49, 30, 195, 0.56)), url('{% static "finance_mgmt/admin/img/piggy-bank-solid.svg" %}');
+    background: #343a40;
     background-position: center;
     background-size: cover;
     position: relative;
 }
 
 .navbar {
-    background-color: rgba(173, 173, 173, 0.56);
+    background-color: rgba(95, 81, 81, 0.56);
     padding: 25px;
     display: flex;
     justify-content: space-between;
