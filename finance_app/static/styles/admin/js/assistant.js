@@ -1,18 +1,34 @@
-console.log(document.getElementById('#send-btn'));
-const chatInput = document.querySelector('#chat-input');
 const sendButton = document.querySelector('#send-btn');
+const chatInput = document.querySelector('#chat-input');
 const chatContainer = document.querySelector(".chat-container");
 const financialForm = document.getElementById('financialForm');
 
 let userText = null;
-const API_KEY = "'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'"
+
 
 document.addEventListener('DOMContentLoaded', function () {
-    const sendButton = document.getElementById('send-btn');
     if (sendButton) {
         sendButton.addEventListener('click', handleOutgoingChat);
     }
 });
+
+console.log(document.getElementById('send-btn'));
+
+
+function getCsrfToken() {
+    let csrfToken = '';
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [key, value] = cookie.trim().split('=');
+        if (key === 'csrftoken') {
+            csrfToken = value;
+            break;
+        }
+    }
+    return csrfToken;
+}
+
+
 
 const createElement = (html, className) => {
     const chatDiv = document.createElement("div");
@@ -22,36 +38,52 @@ const createElement = (html, className) => {
 }
 
 const getChatResponse = async (userText) => {
-    const API_URL = "https://api.openai.com/v1/engines/davinci/completions";
-    const pElement = document.createElement("p");
-
-    // Example prompt setting a specific identity or role
-    const prompt = `You are a financial advisor for my finance management website named Piggybnk. You give advice to users that have questions about their purchases and you should have access to any of their data uploaded on the finances section of the site.\n\nUser: ${userText}\nFinancial Advisor:`;
-
-    const requestOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${API_KEY}` // Ensure secure handling of the API key
-        },
-        body: JSON.stringify({
-            prompt: prompt,
-            max_tokens: 150,
-            temperature: 0.7,
-        })
-    };
-
     try {
-        const response = await fetch(API_URL, requestOptions);
-        pElement.textContent = response.choices[0].text.trim();
-        return data.choices[0].text.trim(); // Extracting and trimming the text response
+        const response = await fetch('/financial-advice/', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCsrfToken()
+            },
+            body: JSON.stringify({ user_question: userText })
+        });
+
+        const data = await response.json();
+        removeTypingAnimation();  // Remove the typing animation
+        console.log("API Response:", data);
+
+        if (data.advice) {
+            displayMessage(data.advice, 'assistant');
+        } else {
+            console.log("No advice key found or no data returned from the API");
+            displayMessage("Sorry, I couldn't process that request.", 'assistant');
+        }
     } catch (error) {
-        console.error("Error fetching the OpenAI response: ", error);
+        console.error("Error fetching the response: ", error);
+        displayMessage("An error occurred while fetching the response.", 'assistant');
     }
-    userText.querySelector("typing-animation").remove();
-    userText.querySelector("chat-details").appendChild(pElement);
 };
 
+function displayMessage(message, sender) {
+    const messageClass = sender === 'user' ? 'outgoing' : 'incoming';
+    const iconClass = sender === 'user' ? 'bxs-user' : 'bxs-bot';
+
+    const html = `
+        <div class="chat-content">
+            <div class="chat-details">
+                <i class='bx ${iconClass}'></i>
+                <p>${message}</p>
+            </div>
+        </div>`;
+    const chatDiv = document.createElement("div");
+    chatDiv.classList.add("chat", messageClass);
+    chatDiv.innerHTML = html;
+    chatContainer.appendChild(chatDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;  // Auto-scroll to the latest message
+    if (sender === 'user') {
+        chatInput.value = '';  // Clear the input field after sending
+    }
+}
 
 const copyResponse = (copy) => {
     const responseTextElement = copy.parentElement.querySelector("p");
@@ -73,27 +105,22 @@ const showTypingAnimation = () => {
             </div>
             <i onclick="copyResponse(this)" class='bx bx-copy-alt'></i>
         </div>`;
-    const incomingChatDiv = createElement(html, "incomoing");
-    chatContainer.appendChild(incomingChatDiv);
-    getChatResponse(incomingChatDiv);
+        const incomingChatDiv = createElement(html, "incoming");
+        chatContainer.appendChild(incomingChatDiv);
 }
 
-const handleOutgoingChat = () => {
-    userText = chatInput.value.trim(); //gets the input from the chat and removes any extra spaces
-    console.log(userText);
-    const html = `
-        <div class="chat-content">
-            <div class="chat-details">
-                <i class='bx bxs-user'></i>
-                <p>${userText}</p>
-            </div>
-        </div>`;
-    // creates an outgoing chat with the users message and prints it in a chat container
-    const outgoingChatDiv = createElement(html, "outgoing");
-    outgoingChatDiv.querySelector("p").textContent = userText;
-    chatContainer.appendChild(outgoingChatDiv);
-    
-    setTimeout(showTypingAnimation, 500);
+const removeTypingAnimation = () => {
+    const typingAnimation = chatContainer.querySelector(".typing");
+    if (typingAnimation) typingAnimation.remove();
+};
+
+function handleOutgoingChat() {
+    let userText = chatInput.value.trim();  // Trim whitespace from the input
+    if (userText) {  // Check if the input is not empty
+        displayMessage(userText, 'user');  // Display the user's message
+        showTypingAnimation();  // Optional: Show a typing animation
+        getChatResponse(userText);  // Send the user's message to the backend
+    }
 }
 
 console.log(chatInput);
