@@ -127,6 +127,11 @@ def financial_advisor_view(request):
 #change line to regular api key if not in virtual environment
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+def some_view(request):
+    api_key = os.getenv('OPENAI_API_KEY')
+    if not api_key:
+        return JsonResponse({'error': 'API key is not set'}, status=500)
+
 @csrf_exempt
 def get_openai_response(request):
     if request.method == "POST":
