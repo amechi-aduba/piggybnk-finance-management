@@ -156,7 +156,7 @@ span.material-symbols-rounded{
     visibility: visible;
 }
 
-.typing-textarea button {
+.typing-textarea span {
     background: transparent;
     border: none;
     cursor: pointer;
