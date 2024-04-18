@@ -125,7 +125,7 @@ def financial_advisor_view(request):
         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 #change line to regular api key if not in virtual environment
-openai.api_key = os.getenv("sk-proj-ywkQ12CmAv5IwuPQd0s6T3BlbkFJplvV41CSC3zQ5kI3nh6P")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def some_view(request):
     api_key = os.getenv('OPENAI_API_KEY')

@@ -2,7 +2,7 @@ const sendButton = document.querySelector('#send-btn');
 const chatInput = document.querySelector('#chat-input');
 const chatContainer = document.querySelector(".chat-container");
 const financialForm = document.getElementById('financialForm');
-const API_KEY = "sk-proj-ywkQ12CmAv5IwuPQd0s6T3BlbkFJplvV41CSC3zQ5kI3nh6P"
+const API_KEY = os.get_env("OPENAI_API_KEY")
 
 
 
@@ -190,6 +190,8 @@ function handleOutgoingChat() {
         getChatResponse(userText);  // Send the user's message to the backend
     }
 }
+
+/* //end of edits
 
 console.log(chatInput);
 // In your JavaScript
