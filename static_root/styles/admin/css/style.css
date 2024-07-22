@@ -2,21 +2,41 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern sans-serif font */
 }
 
 .header {
     min-height: 100vh;
     width: 100%;
+    background: rgb(57, 40, 40); /* Updated background color */
+    background-position: center;
+    background-size: cover;
     position: relative;
 }
 
 .navbar {
-    background-color: rgba(173, 173, 173, 0.56);
+    background-color: rgba(72, 59, 59, 0.8); /* Updated navbar color with transparency */
     padding: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.navbar:hover {
+    background-color: rgba(53, 33, 33, 0.9); /* Darker shade on hover */
+}
+
+.navbar a.nav-link {
+    color: #ffffff;
+    transition: color 0.3s; /* Smooth color transition for hover effect */
+}
+
+.navbar a.nav-link:hover, .navbar a.nav-link.active {
+    color: #dddddd; /* Lighter color on hover */
+    text-decoration: none;
 }
 
 .piggy-svg {
@@ -24,22 +44,29 @@
     height: auto;
 }
 
-/* Custom styles for the piggybnk container */
 .piggybnk {
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
-    font-style: italic;
+    font-style: normal; /* Modern look without italics */
 }
 
 .custom-container {
     width: 100%;
     padding-top: 5rem;
     padding-bottom: 5rem;
-    background-color: #343a40; /* Dark background color */
-    color: #ffffff; /* Text color */
+    background-color: rgb(72, 59, 59); /* Updated container background color */
+    color: #ffffff;
     margin-bottom: 5rem;
+}
+
+/* Improved typography for the hero header */
+.hero-header h1 {
+    font-size: 3.5rem; /* Larger font size for main title */
+    font-weight: 600; /* Boldness for clarity */
+    color: #fff;
+    margin-bottom: 1rem;
 }
 
 @keyframes fadeIn {

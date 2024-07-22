@@ -21,6 +21,18 @@
 <!-- Your HTML body content goes here -->
 
 <body>
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'finance_app:home' %}">PIGGYBNK</a>
+            <ul class="nav-links">
+                <li><a href="{% url 'finance_app:home' %}">Home</a></li>
+                <li><a href="{% url 'finance_app:finances' %}">Finances</a></li>
+                <li><a href="{% url 'finance_app:planner' %}" class="active">Planner</a></li>
+                <li><a href="{% url 'finance_app:assistant' %}">Assistant</a></li>
+                <li><a href="{% url 'finance_app:about' %}">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="chat-container">
     <!--<div class="chat outgoing">
             <div class = "chat-content">

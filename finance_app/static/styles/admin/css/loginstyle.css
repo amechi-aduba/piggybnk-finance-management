@@ -6,7 +6,7 @@
 
 body {
     display: flex;
-    background: rgba(32, 32, 33, 0.56);
+    background: #070952;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
@@ -15,10 +15,10 @@ body {
 .wrapper {
     width: 420px;
     background: transparent;
-    border: 2px solid rgba(102, 102, 102, 0.56);
+    border: 2px solid #ef4da0;
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(28, 28, 28, 0.56);
-    color: rgb(255, 255, 255);
+    box-shadow: 0 0 10px #ef4da0;
+    color: #ff9ace;
     border-radius: 15px;
     padding: 30px 40px;
 }
@@ -41,15 +41,15 @@ body {
     background: transparent;
     border: none;
     outline: none;
-    border: 3px solid rgba(42, 32, 53, 0.56);
+    border: 3px solid #ef4da0;
     font-size: 15px;
     border-radius: 55px;
-    color: rgb(255, 255, 255);
+    color: #ff9ace;
     padding: 20px 45px 20px 20px;
 }
 
 .input-box input::placeholder{
-    color: rgb(255, 255, 255);
+    color: #ff9ace;
 }
 
 .input-box i {
@@ -67,12 +67,12 @@ body {
 }
 
 .remember-forgot label input {
-    accent-color: rgb(255,255,255);
+    accent-color: #ff9ace;
     margin-right: 3px;
 }
 
 .remember-forgot a {
-    color: rgb(255, 255, 255);
+    color: #ff9ace;
     text-decoration: none;
 }
 
@@ -84,7 +84,7 @@ body {
 .wrapper .btn {
     width: 100%;
     height: 45px;
-    background: rgb(200, 200, 200);
+    background: #ef4da0;
     border: none;
     outline: none;
     border-radius: 35px;
@@ -102,7 +102,7 @@ body {
 }
 
 .register-link p a {
-    color: rgb(255, 255, 255);
+    color: #6f74ff;
     text-decoration: none;
     font-weight: 600;
 }

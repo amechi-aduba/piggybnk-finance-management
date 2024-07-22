@@ -18,19 +18,20 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Your custom styles -->
-    <link rel="stylesheet" type="text/css" href="{% static 'finance_mgmt/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/admin/css/loginstyle.css' %}">
 </head>
 
 <body>
 
     <div class="wrapper">
-        <form action="">
+        <form action="{% url 'finance_app:login' %}" method="post">
+            {% csrf_token %}
             <div class="input-box">
-                <input type="text" placeholder="Username" required>
+                <input type="text" name="username" placeholder="Username" required>
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Password" required>
+                <input type="password" name="password" placeholder="Password" required>
                 <i class='bx bxs-key'></i>
             </div>
             <div class="remember-forgot">
@@ -39,7 +40,7 @@
             </div>
             <button type="submit" class="btn">Login</button>
             <div class="register-link">
-                <p>No account yet? Create one here! <a href="registration.html">Register</a></p>
+                <p>No account yet? Create one here! <a href="{% url 'finance_app:registration' %}">Register</a></p>
             </div>
         </form>
     </div>

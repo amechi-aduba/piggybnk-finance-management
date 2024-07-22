@@ -1,56 +1,87 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
+    font-family: 'Arial', sans-serif;
+    color: #fff; /* assuming your text is white as per the website theme */
+    background: rgb(53, 33, 33); /* the theme color */
 }
 
-.header {
-    min-height: 100vh;
-    width: 100%;
-    background: linear-gradient(rgba(26, 3, 199, 0.56), rgba(49, 30, 195, 0.56));
-    background-position: center;
-    background-size: cover;
-    position: relative;
-}
-
+/* Add styles for the header to match your website's theme */
 .navbar {
-    background-color: rgba(173, 173, 173, 0.56);
+    background-color: rgba(72, 59, 59, 0.8); /* Updated navbar color with transparency */
     padding: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.navbar:hover {
+    background-color: rgba(53, 33, 33, 0.9); /* Darker shade on hover */
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0 15px;
+  }
+
+.navbar a.nav-link {
+    color: #ffffff;
+    transition: color 0.3s; /* Smooth color transition for hover effect */
+}
+
+.navbar a.nav-link:hover, .navbar a.nav-link.active {
+    color: #dddddd; /* Lighter color on hover */
+    text-decoration: none;
+}
+.piggy-svg {
+    width: 65px;
+    height: auto;
+}
+
+.piggybnk {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .custom-container {
     width: 100%;
     padding-top: 5rem;
     padding-bottom: 5rem;
-    background-color: #343a40; /* Dark background color */
-    color: #ffffff; /* Text color */
+    background-color: #343a40; 
+    color: #ffffff;
     margin-bottom: 5rem;
 }
 
-.text-center {
-    position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width:70%;
+.hero-header h1 {
+    font-size: 3rem; /* adjust size as needed */
+    margin-bottom: 1rem;
+    font-weight: bold;
+    animation: none; /* assuming you want to remove the fadeIn effect */
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Styles for paragraphs to enhance readability */
+p {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem; /* slightly larger font size for readability */
+    max-width: 800px; /* to prevent lines from being too long on large screens */
+    margin-left: auto;
+    margin-right: auto; /* to center the text blocks */
 }
 
-.animated {
-    animation: fadeIn 1.5s ease-in-out;
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .hero-header h1 {
+        font-size: 2.5rem; /* smaller size for mobile */
+    }
+
+    p {
+        font-size: 1rem; /* smaller size for mobile */
+        padding: 0 1rem; /* add padding on the sides */
+    }
 }

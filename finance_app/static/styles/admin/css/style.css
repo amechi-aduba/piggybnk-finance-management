@@ -2,24 +2,49 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body {
+    font-family: 'Arial', sans-serif;
+    color: #fff; /* assuming your text is white as per the website theme */
+    background: #070952; /* the theme color */
+    overflow-x: hidden;
+}
+
+
 .header {
-    min-height: 100vh;
+    min-height: 65vh;
     width: 100%;
-    background: #343a40;
+    background: #070952;
     background-position: center;
     background-size: cover;
     position: relative;
 }
 
 .navbar {
-    background-color: rgba(95, 81, 81, 0.56);
+    background-color: #ef4da0;
     padding: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.navbar:hover {
+    background-color: #a1306a;
+}
+
+.navbar a.nav-link {
+    color: #ffffff;
+    transition: color 0.3s;
+}
+
+.navbar a.nav-link:hover, .navbar a.nav-link.active {
+    color: #dddddd;
+    text-decoration: none;
 }
 
 .piggy-svg {
@@ -27,35 +52,218 @@
     height: auto;
 }
 
-/* Custom styles for the piggybnk container */
 .piggybnk {
-    color: #fff;
+    color: #ef4da0;
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
-    font-style: italic;
+    font-style: normal;
 }
 
 .custom-container {
     width: 100%;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    background-color: #343a40; /* Dark background color */
-    color: #ffffff; /* Text color */
+    background-color: rgb(255, 255, 255);
+    color: #ffffff;
     margin-bottom: 5rem;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-50px)
+.features {
+    color:#ef4da0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem; /* Adjust as necessary */
+}
+
+.features-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(7, 9, 82, 0.8); /* Transparent overlay */
+    z-index: 0;
+}
+
+.container > .features {
+    position: relative;
+    z-index: 2;
+    color: #ef4da0;
+}
+
+.features h3 {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+.features h4 {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    flex: 1 1 100%; /* Ensure it takes full width of its container */
+}
+
+.features p {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.features-container .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.features-container .col-md-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem; /* Adjust space between rows */
+    flex: 1 1 30%; /* Ensure columns are flexible */
+    min-width: 250px; /* Minimum width to ensure readability */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 980px) {
+    .features h3, .features h4 {
+        font-size: .8rem;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0)
+    .features p {
+        font-size: 0.6rem;
+    }
+    .features i {
+        font-size: 2rem; /* Smaller icon size */
+    }
+    .features-container .row {
+        gap: .2rem; /* Reduce space between items */
+    }
+    .features-container .col-md-4 {
+        flex: 1 1 30%; /* Adjust width on medium screens */
     }
 }
 
-.animated {
-    animation: fadeIn 1.5s ease-in-out;
+@media (max-width: 576px) {
+    .features h3, .features h4 {
+        font-size: 1rem;
+    }
+    .features p {
+        font-size: 0.5rem;
+    }
+    .features i {
+        font-size: 1.5rem; /* Even smaller icon size */
+    }
+    .features-container .row {
+        gap: 0.01rem; /* Further reduce space between items */
+    }
+    .features-container .col-md-4 {
+        flex: 1 1 30%; /* Stack items vertically on small screens */
+        min-width: unset; /* Remove minimum width for stacking */
+    }
+}
+.testimonials {
+    background-color: #070952;
+    color: #ef4da0;
+    padding: 3rem 0;
+    margin: 0;
+}
+
+.testimonials blockquote {
+    font-size: 1rem;
+    font-style: italic;
+    border-left: none;
+}
+
+.testimonials footer {
+    font-size: 0.875rem;
+    color: #9e2e68;
+}
+
+.newsletter {
+    background-color: #ef4da0;
+    color: #070952;
+    padding: 3rem 0;
+    margin: 0;
+}
+
+.newsletter h2 {
+    font-size: 2rem;
+}
+
+.newsletter p {
+    font-size: 1rem;
+}
+
+.newsletter .form-inline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newsletter .form-control {
+    width: 250px;
+}
+
+.container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 auto;
+}
+
+.get-started {
+    background-color: #ef4da0;
+    color: #070952;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px; /* Rounded borders for modern look */
+    cursor: pointer;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover and active effects */
+}
+
+.hero-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.get-started {
+    margin-top: 1.5rem; /* Increased to add more space above the button */
+}
+
+.hero-header h1 {
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: #ef4da0;
+    margin-bottom: 1.5rem;
+}
+
+/* Typing Animation */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 65%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #ef4da0; }
+}
+
+.typing-animation {
+    font-size: 3.5rem; /* Adjust size as needed */
+    font-weight: 600;
+    color: #ef4da0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .25em solid #ef4da0;
+    display: inline-block; /* Ensure it's treated as inline for padding */
+    padding-bottom: 0.1em; /* Add padding to prevent chopping off */
+    animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
 }

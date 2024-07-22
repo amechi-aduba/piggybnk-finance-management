@@ -18,18 +18,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from finance_app import views
+from finance_app.views import *
 
 urlpatterns = [
-    path("", views.home, name='finance_management'),
-    path("finances/", views.finances, name='finances'),
-    path("planner/", views.planner, name='planner'),
-    path("assistant/", views.assistant, name='assistant'),
-    path("about/", views.about, name='about'),
-    path("login/", views.login_page, name='login_page'),
-    path('registration/', views.registration, name='registration'),
-    path('', include('finance_app.urls'))
-]
+    path('', home, name="home"),
+    path('admin/', admin.site.urls),
+    path('finance_app/', include('finance_app.urls', namespace='finance_app')),  # Adjusted to include the app prefix 'finance_app/'
+    path('finances/', finances, name='finances'),
+    path('finance_app/get_openai_response/', get_openai_response, name='get_openai_response'),
+    path('login/', login_page, name="login"),
+    path('registration/', registration, name="registration"),
+    path('save-transaction/', save_transaction, name="save_transaction"),
+    path('finance_app/about/', about, name="about"),
+    # Include other apps' URLs as needed.
+] 
 
 if settings.DEBUG:
    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

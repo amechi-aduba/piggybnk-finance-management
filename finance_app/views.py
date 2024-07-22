@@ -1,85 +1,95 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from .forms import RegistrationForm, LoginForm
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from .forms import RegistrationForm, LoginForm, TransactionForm
 from .models import Transaction
-from .forms import TransactionForm
+from django.contrib import messages
 import os
-import ollama
-from django.views.decorators.csrf import csrf_exempt
-import traceback
 import json
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 import openai
+from decouple import config
 
+
+def index(request):
+    return render(request, "index.html")
 
 class FinanceManagementView(TemplateView):
     template_name = "finance_management.html"
 
-
 def home(request):
     return render(request, "finance_management.html", {})
-
 
 @login_required
 def finances(request):
     transactions = Transaction.objects.filter(user=request.user).order_by("-created_at")
     return render(request, "finances.html", {})
 
-
 @login_required
 def planner(request):
     return render(request, "planner.html", {})
-
 
 @login_required
 def assistant(request):
     return render(request, "assistant.html", {})
 
 
-@csrf_exempt  # Temporarily disable CSRF for this view. Better to handle CSRF in your AJAX request.
-def save_transaction(request):
-    if request.method == "POST":
-        form = TransactionForm(request.POST)
-        if form.is_valid():
-            transaction = form.save(commit=False)
-            transaction.user = request.user
-            transaction.save()
-            return JsonResponse(
-                {"status": "success", "message": "Transaction saved successfully."}
-            )
+
+
+api_key = config('API_KEY')
+
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def get_openai_response(request):
+    try:
+        data = json.loads(request.body)
+        user_input = data.get("userText", "")
+
+        if not user_input:
+            return JsonResponse({"error": "No user input provided"}, status=400)
+
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": user_input}]
+        )
+
+        message = response.get("choices")[0].get("message").get("content") if response.get("choices") else None
+
+        if message:
+            return JsonResponse({"advice": message})
         else:
-            return JsonResponse(
-                {"status": "error", "message": "Invalid transaction data"}
-            )
-    return JsonResponse({"status": "error", "message": "Invalid request"})
+            return JsonResponse({"error": "No response from AI"}, status=500)
+
+    except Exception as e:
+        return JsonResponse({"error": f"Server Error: {str(e)}"}, status=500)
 
 
 def about(request):
     return render(request, "about.html", {})
 
-
 def login_page(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("finance_management")
-            else:
-                form.add_error("username", "Invalid username or password")
-    else:
-        form = LoginForm()
-        return render(request, "login.html", {"form": form})
-
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('finance_app:home')
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, 'login.html')
 
 def registration(request):
     if request.method == "POST":
@@ -90,10 +100,7 @@ def registration(request):
             confirm_password = form.cleaned_data["confirm_password"]
             if password == confirm_password:
                 try:
-                    # Create new user
-                    user = User.objects.create_user(
-                        username=username, password=password
-                    )
+                    user = User.objects.create_user(username=username, password=password)
                     return redirect("login")
                 except IntegrityError:
                     form.add_error("username", "Username already exists")
@@ -104,65 +111,28 @@ def registration(request):
     return render(request, "registration.html", {"form": form})
 
 @csrf_exempt
-def financial_advisor_view(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            user_question = data['user_question']
-            response = ollama.chat(
-                model='codellama:7b-instruct',
-                messages=[
-                    {'role': 'user', 'content': user_question},
-                    {'role': 'system', 'content': 'You are a financial advisor for Piggybnk...'},
-                ]
-            )
-            return JsonResponse({'advice': 'Your response'})
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON'}, status=400)
-        except KeyError:
-            return JsonResponse({'error': 'Missing user_question field'}, status=400)
-    else:
-        return JsonResponse({'error': 'Invalid request method'}, status=400)
-
-#change line to regular api key if not in virtual environment
-openai.api_key = os.getenv("OPENAI_API_KEY")
-
-def some_view(request):
-    api_key = os.getenv('OPENAI_API_KEY')
-    if not api_key:
-        return JsonResponse({'error': 'API key is not set'}, status=500)
-
-@csrf_exempt
-def get_openai_response(request):
+def save_transaction(request):
     if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-            user_input = data.get("userText", "")
+        form = TransactionForm(request.POST)
+        if form.is_valid():
+            transaction = form.save(commit=False)
+            transaction.user = request.user
+            transaction.save()
+            return JsonResponse({"status": "success", "message": "Transaction saved successfully."})
+        else:
+            return JsonResponse({"status": "error", "message": "Invalid transaction data"})
+    return JsonResponse({"status": "error", "message": "Invalid request"})
 
-            prompt = f"""
-            You are a financial advisor for a finance management website named Piggybnk. 
-            You give advice to users that have questions about their purchases and you should 
-            have access to any of their data uploaded on the finances section of the site.
-
-            User: {user_input}
-            Financial Advisor:
-            """
-
-            if not openai.api_key:
-                return JsonResponse({"error": "The OpenAI API key has not been set."}, status=500)
-
-            response = openai.Completion.create(
-                engine="davinci",
-                prompt=prompt,
-                max_tokens=150
-            )
-
-            # Assuming the API response structure, adjust if needed
-            advisor_response = response.choices[0].text.strip() if response.choices else "No response received."
-
-            return JsonResponse({"response": advisor_response})
-        except Exception as e:
-            traceback.print_exc()  # This will print the stack trace to the console, which is very useful for debugging
-            return JsonResponse({"error": "An error occurred while processing your request."}, status=500)
-    else:
-        return JsonResponse({"error": "This endpoint only supports POST requests."}, status=400)
+    # Modify the view that handles the endpoint
+def financial_advice(request):
+    try:
+        data = json.loads(request.body)
+        user_input = data['userText']  # Make sure you are accessing the correct key
+        # Process the user_input to generate a response
+        return JsonResponse({"advice": "Generated response"})
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid JSON"}, status=400)
+    except KeyError:
+        return JsonResponse({"error": "Malformed data, missing 'userText'"}, status=400)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)

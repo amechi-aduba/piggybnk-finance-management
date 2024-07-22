@@ -25,18 +25,20 @@
      
   </head>
   <body>
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
-            <a class="navbar-brand" href="#">PIGGYBNK</a>
+            <a class="navbar-brand" href="{% url 'finance_app:home' %}">PIGGYBNK</a>
             <ul class="nav-links">
-                <li><a href="{% url 'finance_management' %}">Home</a></li>
-                <li><a href="{% url 'finances' %}">Finances</a></li>
-                <li><a href="{% url 'planner' %}" class="active">Planner</a></li>
-                <li><a href="{% url 'assistant' %}">Assistant</a></li>
-                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'finance_app:home' %}">Home</a></li>
+                <li><a href="{% url 'finance_app:finances' %}">Finances</a></li>
+                <li><a href="{% url 'finance_app:planner' %}" class="active">Planner</a></li>
+                <li><a href="{% url 'finance_app:assistant' %}">Assistant</a></li>
+                <li><a href="{% url 'finance_app:about' %}">About Us</a></li>
             </ul>
         </div>
     </nav>
+    
     <div class="container">
       <div class="left">
         <div class="calendar">
@@ -94,21 +96,11 @@
               />
             </div>
           </div>
-          <div class="add-event-footer">
+          <div class="add-event">
             <button class="add-event-btn">Add Event</button>
           </div>
         </div>
       </div>
-      <button class="add-event">
-        <i class="fas fa-plus"></i>
-      </button>
-    </div>
-
-    <div class="credits">
-      <p>
-        Crafted with ❤️ by
-        <a href="https://youtu.be/6EVgmpm4z5U" target="_blank">Open Source Coding</a>
-      </p>
     </div>
 
     <script src="{% static 'styles/admin/js/calendar_script.js' %}"></script>

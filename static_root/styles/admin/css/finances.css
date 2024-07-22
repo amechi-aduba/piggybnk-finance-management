@@ -1,127 +1,145 @@
-* {
+/* General Styles */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Modern, clean font */
+    background-color: rgb(57, 40, 40); /* Dark background for modern look */
+    color: #fff; /* White text for contrast */
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-.header {
-    min-height: 100vh;
-    width: 100%;
-    position: relative;
-}
-
+/* Navbar Styles */
 .navbar {
-    background-color: rgba(209,209,209);
-    padding: 25px;
+    background-color: rgba(72, 59, 59, 0.8); /* Darker background for navbar */
+    padding: 10px 0;
+}
+
+.navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
-    width: 100%; /* Ensure navbar spans the entire width */
-    top: 0; /* Position at the top of the viewport */
-    z-index: 1000; /* Ensure the navbar is above other elements */
 }
-body {
-    margin-top: 70px;
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0 15px;
+}
+
+.navbar a:hover {
+    color: rgba(53, 33, 33, 0.9); /* Light grey for hover effect */
 }
 
 .nav-links {
-    display: flex;
     list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
 }
 
-.nav-links li {
-    margin-left: 20px;
-}
-
-.nav-links a {
-    color: #000000;
-    text-decoration: none;
-}
-
-.piggybnk {
-    color: #fff;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-    font-style: italic;
-}
-
-.piggy-svg {
-    width: 65px;
-    height: auto;
-}
-
-/* Custom styles for the piggybnk container */
-.piggybnk {
-    color: #fff;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-    font-style: italic;
-}
-
-body {
-    width: 100%;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    background-color: #343a40; /* Dark background color */
-    color: #ffffff; /* Text color */
-    margin-bottom: 5rem;
-}
-
+/* Title Styles */
 .title-text {
+    font-size: 2.5em; /* Larger font for main title */
     text-align: center;
-    margin-top: 50px;
-    font-size: 36px;
+    margin: 20px 0;
+    font-weight: bold;
 }
 
-.subtitles {
-    color: white;
-}
-
-.finance-vals {
-    color: white;
-}
-
-.button {
-    display: block;
-    margin: 0 auto; /* Center horizontally */
-    text-align: center; /* Center text inside button */
-}
-
-.your-piggybnk {
-    text-align: center;
-    font-size: 24px;
-}
-
+/* Form Styles */
 .transaction-form {
     display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.transaction-form .left,
+.transaction-form .right {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 0 auto; /* Center horizontally */
-    max-width: 400px; /* Adjust the max-width as needed */
 }
 
+input[type="text"],
+input[type="number"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px; /* Rounded borders for modern look */
+}
+
+/* Button Styles */
+.button {
+    background-color: #4CAF50; /* Green color for buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px; /* Rounded borders for buttons */
+}
+
+.button:hover {
+    background-color: #45a049; /* Darken the button when hovering */
+}
+
+/* Chart Container Styles */
+.chart-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Table Styles */
 .table {
-    margin: 0 auto; /* Center horizontally */
-    max-width: 800px; /* Adjust the max-width as needed */
+    width: 80%;
+    margin: 20px auto;
+    background-color: #444; /* Dark background for tables */
+    border-collapse: collapse;
 }
 
+.table th,
+.table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #555; /* Subtle border for rows */
+}
+
+/* Subtitle Styles */
+.subtitles {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Hiding Elements */
 .hidden {
     display: none;
 }
 
-::-webkit-scrollbar {
-    width: 5px;
+/* Showing table with animation */
+.your-piggybnk {
+    display: none;
+    font-size: 2em;
+    text-align: center;
+    margin: 20px 0;
 }
 
-::-webkit-scrollbar-track {
-    background: #f5f5f5;
-    border-radius: 50px;
+.your-piggybnk.fadeIn {
+    animation: fadeIn 2s;
 }
 
-::-webkit-scrollbar-thumb {
-    background: var(--primary-clr);
-    border-radius: 50px;
+/* Keyframes for fadeIn effect */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar .container,
+    .transaction-form,
+    .chart-container,
+    .table {
+        flex-direction: column;
+    }
 }

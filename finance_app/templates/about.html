@@ -40,14 +40,14 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
                 <div class="nav-links">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a href="{% url 'finance_management' %}" class="nav-link active">Home</a></li>
-                        <li class="nav-item"><a href="{% url 'finances' %}" class="nav-link active">Finances</a></li>
-                        <li class="nav-item"><a href="{% url 'planner' %}" class="nav-link active">Planner</a></li>
-                        <li class="nav-item"><a href="{% url 'assistant' %}" class="nav-link active">Assistant</a></li>
-                        <li class="nav-item"><a href="{% url 'about' %}" class="nav-link active">About Us</a></li>
+                        <li class="nav-item"><a href="{% url 'finance_app:home' %}" class="nav-link active">Home</a></li>
+                        <li class="nav-item"><a href="{% url 'finance_app:finances' %}" class="nav-link active">Finances</a></li>
+                        <li class="nav-item"><a href="{% url 'finance_app:planner' %}" class="nav-link active">Planner</a></li>
+                        <li class="nav-item"><a href="{% url 'finance_app:assistant' %}" class="nav-link active">Assistant</a></li>
+                        <li class="nav-item"><a href="{% url 'finance_app:about' %}" class="nav-link active">About Us</a></li>
                     </ul>
                 </div>
-            </div>            
+            </div>              
         </nav>
         <div class="container-xxl py-5 bg dark hero-header mb-5 mid-text-container">
             <div class="Row align-items-center text-center">
@@ -55,9 +55,21 @@
                 <p id="info-text-1"> Amechi Aduba and Isaac Tomeho are undergraduate students from Clark University who have a firsthand
                     understanding of the daily struggles of college students overspending on things.
                 </p>
+                <div class="images">
+                    <div class="image-wrapper">
+                        <img src="{% static 'img/amechi_pic.jpg' %}" alt="amechi" class="amechi">
+                        <p> Amechi Aduba </p>
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="{% static 'img/isaac_pic.jpg' %}" alt="isaac" class="isaac">
+                        <p> Isaac Tomeho </p>
+                    </div>
+                </div>
                 <h1 class="display-3 text-white animated fadeIn">The Stats</h1>
                 <p id="info-text-2"> Grand Canyon University has estimated that historically a college student's budget can be affected by items other than food, housing and transportation. On average, students can expect to spend about $158.98 on clothing and accessories per year, and about $164.38 on furnishings. Electronics are a more significant expense, at an average of $306.41 per year. 
                 </p>
+                <p id='info-text-3'> 
+                    College students often face significant challenges in managing their finances due to a combination of factors. First, many students encounter the responsibility of managing substantial sums of money for the first time, including tuition, accommodation, and daily living expenses. Without prior experience or education in personal finance, making informed decisions can be daunting. Additionally, the irregular income patterns common among students, such as periodic financial aid disbursements or part-time job earnings, complicate budgeting and planning. The high costs of education and living, coupled with the temptation to spend on social activities, can lead to overspending and debt accumulation. Finally, the stress and demands of academic responsibilities may leave little time or energy for students to devote to financial management, increasing the likelihood of financial missteps.</p>
             </div>
         </div>    
     </section>

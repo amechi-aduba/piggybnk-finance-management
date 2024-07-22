@@ -1,25 +1,55 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
+    font-family: 'Arial', sans-serif;
+    color: #fff; /* assuming your text is white as per the website theme */
+    background: #070952; /* the theme color */
 }
 
-.header {
-    min-height: 100vh;
-    width: 100%;
-    background: #343a40;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-}
-
+/* Add styles for the header to match your website's theme */
 .navbar {
-    background-color: rgba(95, 81, 81, 0.56);
+    background-color: #ef4da0; /* Updated navbar color with transparency */
     padding: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.navbar:hover {
+    background-color: #a1306a; /* Darker shade on hover */
+}
+
+.images {
+    display: flex;
+    justify-content: center; /* Adjust this to control spacing */
+    align-items: center; /* Align items vertically center */
+}
+
+.image-wrapper {
+    text-align: center; /* Center the text under the images */
+}
+
+.images img {
+    width: 250px; /* Adjust as needed */
+    height: auto;
+}
+
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0 15px;
+  }
+
+.navbar a.nav-link {
+    color: #ffffff;
+    transition: color 0.3s; /* Smooth color transition for hover effect */
+}
+
+.navbar a.nav-link:hover, .navbar a.nav-link.active {
+    color: #dddddd; /* Lighter color on hover */
+    text-decoration: none;
 }
 .piggy-svg {
     width: 65px;
@@ -27,7 +57,7 @@
 }
 
 .piggybnk {
-    color: #fff;
+    color: #ef4da0;
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
@@ -36,36 +66,36 @@
 
 .custom-container {
     width: 100%;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    background-color: #343a40; 
+    background-color: rgb(255, 255, 255);
     color: #ffffff;
     margin-bottom: 5rem;
 }
 
-.container-xxl h1 {
-    margin-bottom: 45px;
-    margin-top: 20px;  /* Adjust the value as needed */
+.hero-header h1 {
+    font-size: 3rem; /* adjust size as needed */
+    margin-bottom: 1rem;
+    font-weight: bold;
+    animation: none; /* assuming you want to remove the fadeIn effect */
 }
 
-#info-text-1 {
-    color: rgb(255,255,255);
-}
-#info-text-2 {
-    color: rgb(255,255,255);
+/* Styles for paragraphs to enhance readability */
+p {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem; /* slightly larger font size for readability */
+    max-width: 800px; /* to prevent lines from being too long on large screens */
+    margin-left: auto;
+    margin-right: auto; /* to center the text blocks */
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .hero-header h1 {
+        font-size: 2.5rem; /* smaller size for mobile */
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-.animated {
-    animation: fadeIn 1.5s ease-in-out;
+    p {
+        font-size: 1rem; /* smaller size for mobile */
+        padding: 0 1rem; /* add padding on the sides */
+    }
 }

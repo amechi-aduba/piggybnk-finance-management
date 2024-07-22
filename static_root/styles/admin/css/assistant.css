@@ -27,6 +27,35 @@ body{
     background: var(--outgoing-chat-bg)
 }
 
+/* Navbar Styles */
+.navbar {
+    background-color: rgba(72, 59, 59, 0.8); /* Darker background for navbar */
+    padding: 10px 0;
+  }
+  
+  .navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0 15px;
+  }
+  
+  .navbar a:hover {
+    color: rgba(53, 33, 33, 0.9); /* Light grey for hover effect */
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
 .chat-container {
     max-height: 100vh;
     padding-bottom: 150px;
@@ -156,7 +185,7 @@ span.material-symbols-rounded{
     visibility: visible;
 }
 
-.typing-textarea button {
+.typing-textarea span {
     background: transparent;
     border: none;
     cursor: pointer;

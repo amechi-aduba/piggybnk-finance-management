@@ -56,47 +56,39 @@ $(document).ready(function() {
 
     // Event listener for form submission
     $('#transaction-form').submit(function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
     
-        // Get transaction data from form inputs
         var transactionName = $('#transaction-name').val();
         var transactionAmount = parseFloat($('#transaction-amount').val());
         var reimbursementName = $('#payment-name').val();
         var reimbursementAmount = parseFloat($('#reimbursement-amount').val());
     
-        // AJAX backend request to send data to the server
         $.ajax({
-            url: '/finance/save-transaction/', // Replace with your Django view URL
+            url: '/save-transaction/',
             type: 'POST',
             data: {
                 'transaction_name': transactionName,
                 'transaction_amount': transactionAmount,
                 'reimbursement_name': reimbursementName,
                 'reimbursement_amount': reimbursementAmount,
-                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val() // CSRF token
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
             },
             success: function(response) {
-                // Update total transaction and reimbursement amounts
                 totalTransactionAmount += transactionAmount;
                 totalReimbursementAmount += reimbursementAmount;
     
-                // Fade in the table and your-piggybnk if it's the first submission
+                updatePieChart();
+                updateTransactionTable(transactionName, transactionAmount, reimbursementName, reimbursementAmount);
+    
                 if (!tableVisible) {
                     $('#transaction-table, .your-piggybnk').fadeIn();
                     tableVisible = true;
                 }
-    
-                // Update the pie chart and transaction table with new data
-                updatePieChart();
-                updateTransactionTable(transactionName, transactionAmount, reimbursementName, reimbursementAmount);
             },
             error: function(error) {
-                // Handle error
                 console.error("Error processing transaction:", error);
             }
         });
     
-        // Reset form inputs
-        $('#transaction-form')[0].reset();
-    });
+    });    
 }) 
